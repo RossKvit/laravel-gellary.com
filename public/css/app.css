@@ -1,0 +1,10 @@
+.gallery-images {
+  display: block;
+  width: 600px;
+  margin: 0 auto;
+}
+
+.gallery-images__form_example {
+  display: none;
+}
+
