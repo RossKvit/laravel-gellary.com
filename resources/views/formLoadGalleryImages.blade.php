@@ -1,14 +1,14 @@
 @extends('main')
 
 @section('content')
-    <div class="gallery-images">
+    <div class="gallery-images" data-csrf-token="{{ csrf_token() }}" data-action="http://local.one.tm.com/gallery.com/public/load-images">
         <div class="gallery-images__description">
             {{ $description }}
 
             <button class="gallery-images__forms-add-item">{{$title_button_add_item}}</button>
         </div>
 
-        <form class="gallery-images__form gallery-images__form_example">
+        <form action="" class="gallery-images__form gallery-images__form_example">
             <input class="gallery-images__input-file" type="file">
             <input class="gallery-images__input-title" type="text">
             <div class="gallery-images__tags-list">

@@ -6,8 +6,8 @@
 
     <title>Images Gallery</title>
 
-    <link rel="stylesheet" href="/css/app.css">
-    <script src="/js/app.js"></script>
+    <link rel="stylesheet" href="{{ app()->make('url')->to('/') }}/css/app.css">
+    <script src="{{ app()->make('url')->to('/') }}/js/app.js"></script>
 </head>
 <body>
     <header class="header">

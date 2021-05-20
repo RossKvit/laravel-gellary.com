@@ -12,3 +12,4 @@
 */
 
 Route::get('/', 'LoadGalleryImages@showForm' );
+Route::post('/load-images', 'LoadGalleryImages@imagesLoad' );
