@@ -3,7 +3,6 @@ class Gallery {
     constructor(){
         this.imagesFormsList = document.querySelector('.gallery-images__forms-list');
         this.imagesFormsListExample = document.querySelector('.gallery-images__form_example');
-        this.galleryImagesList = [];
 
         this.addNewImageForm();
         this.initEventListeners();
@@ -20,14 +19,11 @@ class Gallery {
             document.querySelector('.gallery-images__load-btn').addEventListener('click', function (e) {
                 e.preventDefault();
 
-                self.loadImagesToServer();
+                self.loadToServerImageFormsData();
             });
         }
 
-        /*document.querySelectorAll('.dishes-page__item-order').forEach( function (el) {
-            el.addEventListener( 'click', function(e){
-            } );
-        } );*/
+        let fileReader = new FileReader();
     }
 
     addNewImageForm(){
@@ -38,41 +34,32 @@ class Gallery {
         self.imagesFormsList.appendChild( currentForm );
     }
 
-    getImageFormsData(){
-        let formListData = [],
+    loadToServerImageFormsData(){
+        let formDataList = [],
+			self = this,
 			fileReader = new FileReader();
 		
         document.querySelectorAll('.gallery-images__form').forEach( function (form) {
             if(!form.classList.contains('gallery-images__form_example')){
 				
-				fileReader.onload = () => {
-					formListData.push({
-						title: form.querySelector('.gallery-images__input-title').value,
-						tags: form.querySelector('.gallery-images__input-tag').value,
-						image: fileReader.result
-					});
-				}
-				fileReader.readAsArrayBuffer( form.querySelector('.gallery-images__input-file').files[0] )
-				console.log( formListData );
+				let imageFormData = new FormData();
+				imageFormData.append('title', form.querySelector('.gallery-images__input-title').value);
+				imageFormData.append('tag', form.querySelector('.gallery-images__input-tag').value);
+				imageFormData.append('file', form.querySelector('.gallery-images__input-file').files[0]);
+
+				self.loadImageFormToServer( imageFormData );
+
             }
         });
 
-        return formListData;
+        return formDataList;
     }
 
-    loadImagesToServer(){
-        let self = this,
-            imagesDataList = self.getImageFormsData();
-        
-		console.log( imagesDataList );
-		
-        let params = {
-            imagesDataList: imagesDataList
-        };
-
+    loadImageFormToServer( formData ){
+        let self = this;
 
         // Check file selected or not
-        if(params.imagesDataList.length > 0 ){
+        if( formData.has('file') ){
             self.httpRequest( document.querySelector('.gallery-images').getAttribute('data-action'), function( httpRequest ){
                 if ( httpRequest.status == 200 ) {
                     alert('Images loaded!');
@@ -80,11 +67,10 @@ class Gallery {
                 } else {
                     alert('Sorry. Images loaning failed by unexpected error =(');
                 }
-            }, params );
+            }, formData );
         }else{
             alert("Please select a file.");
         }
-
     }
 
     httpRequest( url, callback, params ) {
@@ -104,8 +90,6 @@ class Gallery {
 		httpRequest.open("POST", url, true);	
         //httpRequest.setRequestHeader("Content-Type", "application/json"); // "application/json"
         httpRequest.setRequestHeader("X-CSRF-TOKEN", csrfToken);
-		 
-		console.log(params);
 		 
         httpRequest.send( params );
     }

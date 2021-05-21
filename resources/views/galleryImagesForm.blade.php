@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('content')
-    <div class="gallery-images" data-csrf-token="{{ csrf_token() }}" data-action="http://local.one.tm.com/gallery.com/public/load-images">
+    <div class="gallery-images" data-csrf-token="{{ csrf_token() }}" data-action="{{ $gallery_form_route }}">
         <div class="gallery-images__description">
             {{ $description }}
 
