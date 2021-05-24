@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/gallery', 'GalleryImagesPage@show' );
+Route::get('/', 'GalleryImagesLoader@showForm' );
+Route::post('/load-images', 'GalleryImagesLoader@imagesLoad' )->name('load-images');

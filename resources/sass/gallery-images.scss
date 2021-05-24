@@ -1,0 +1,28 @@
+.gallery-images{
+  display: block;
+  width: 450px;
+  margin: 0 auto;
+
+  &__description{
+    margin: 0 0 20px 0;
+  }
+  &__form{
+    margin: 0 0 20px 0;
+
+    &_example{
+      display: none;
+    }  
+  }
+  &__input-file{
+    width: 100%;
+  }
+  &__input-title,
+  &__input-tag{
+    width: 100%;
+  }
+
+  &__forms-list{
+
+  }
+
+}

@@ -1,0 +1,27 @@
+.gallery-images {
+  display: block;
+  width: 450px;
+  margin: 0 auto;
+}
+
+.gallery-images__description {
+  margin: 0 0 20px 0;
+}
+
+.gallery-images__form {
+  margin: 0 0 20px 0;
+}
+
+.gallery-images__form_example {
+  display: none;
+}
+
+.gallery-images__input-file {
+  width: 100%;
+}
+
+.gallery-images__input-title,
+.gallery-images__input-tag {
+  width: 100%;
+}
+
